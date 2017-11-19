@@ -37,9 +37,7 @@ class Signin extends React.Component {
 
     var com_data = {
       com_name: this.com_name.value,
-      investment: investment,
-      per_share: perShare,
-      totalShare: investment / perShare
+      com_details: this.com_detail.value
     }
     console.log(com_data)
     this.props.signin(credentials)
@@ -106,7 +104,7 @@ class Signin extends React.Component {
                 inputRef={(input) => this.per_share = input}
               /> */}
 
-              <FieldGroup
+              {/* <FieldGroup
                 type="number"
                 label="Investment"
                 placeholder="Investment"
@@ -120,7 +118,7 @@ class Signin extends React.Component {
                 placeholder="PerShare"
                 value={this.state.perShare}
               onChange={this.onChange('perShare')}
-              />
+              /> */}
 
               <FieldGroup
                 id="email"
@@ -135,7 +133,6 @@ class Signin extends React.Component {
                 label="Password"
                 placeholder="Password"
                 inputRef={(input) => this.password = input}
-
               />
             </Col>
             <Col xs={12} style={{ textAlign: 'center', marginBottom: 50 }}>
@@ -160,6 +157,20 @@ class Signin extends React.Component {
 //       user: state.authReducer
 //   }
 // }
+
+
+
+// let addShare = (dispatch, payload) => {
+//   auth().onAuthStateChanged(user => {
+//     database().ref('Shares/' + user.uid).push(payload).then(() => {
+//       // alert('hogaya')
+//       console.log("add share successfull")
+//     })
+//   })
+//   // dispatch({ type: '', payload })
+// }
+
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
