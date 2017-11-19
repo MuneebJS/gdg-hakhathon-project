@@ -14,7 +14,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 // import './style.css'
 import moment from 'moment';
 import * as firebase from 'firebase'
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 
 
@@ -30,41 +30,40 @@ class RequestService extends React.Component {
         super();
         this.state = {
             // startDate: ''
-            companies: [{
-                com_name: "ABC Company",
-                comp_detail: "kjaslkdfjlasdjflkasjd j askdjf kasjdf kajsdfjaklsj",
-                shares_details: {
-                    investment: 1000000,
-                    perShare: 10,
-                    totalShares: 10000
-                }
-
-            }]
+            companies: []
         }
         this.comp_click_hand = this.comp_click_hand.bind(this)
         this.getCompanies = this.getCompanies.bind(this)
     }
 
     componentDidMount() {
-
+        this.getCompanies();
     }
 
     comp_click_hand(e) {
-        browserHistory.push('/company');
+        // browserHistory.push('/company');
     }
     getCompanies(date) {
         var arrayToPushedData = [];
         // db reference
-        let dbRef = firebase.database().ref('Companies');
-        dbRef.on('child_added', snap => {
-            arrayToPushedData = this.state.data;
-            arrayToPushedData.push(snap.val());
-            this.setState({
-                companies: arrayToPushedData,
-            })
+        let dbRef = firebase.database().ref('Shares');
+        // dbRef.on('child_added', snap => {
+        //     console.log(snap)
+        //     // arrayToPushedData = this.state.data;
+        //     arrayToPushedData.push(snap.val());
+        //     this.setState({
+        //         companies: arrayToPushedData,
+        //     })
+        // })
+
+        firebase.database().ref('Shares').on('value', snap => {
+            this.setState({ companies: Object.values(snap.val()).map(a => Object.values(a)[0]) })
+            console.log(Object.values(snap.val()).map(a => Object.values(a)[0]))
         })
+
     }
     render() {
+        console.log(this.state.companies)
         return (
             <Grid>
                 <Row className="show-grid">
@@ -72,10 +71,19 @@ class RequestService extends React.Component {
                         <Title>Companies</Title>
                         {this.state.companies.map((u, i) => {
                             return (
-                                <a hred="#" onClick={this.comp_click_hand(u.uid)}>
-                                    <h2>{u.com_name}</h2>
-                                    <p>{u.comp_detail}</p>
+                                <a href="#" onClick={this.comp_click_hand(u.uid)} style={{
+                                    marginTop: 20,
+                                    borderBottom: "2px solid #eee"
+                                }}>
+                                    {/* <h2></h2> */}
+                                    <h2>{u.name}</h2>
+                                    <h4>Shares:  {u.investment}</h4>
+                                    <h4>Per Share Rate: {u.perShare}</h4>
+                                    {/* <h4>{u}</h4> */}
+                                    {/* <p>{u.comp_detail}</p> */}
+
                                 </a>
+
                             )
                         })}
 

@@ -20,15 +20,16 @@ export default class Routes extends React.PureComponent {
         return (     
         <Router history={browserHistory}>
             <Route path='/' component={Layout}>
-            <IndexRoute component={CompanyListing}/>
+            <IndexRoute component={Signup}/>
+              <Route path='signin' component={Signin} />
               <Route path='signup' component={Signup} />
-              <Route path='home' component={Signup} />
               <Route path='user_signup' component={UserSignup} />
               {/* <Route path='user_signin' component={UserSignin} /> */}
               <Route path='allServices' component={AllServices} />
               {/* <Route path='signup' component={Signup} /> */}
               <Route path='request_service' component={RequestService} />
               <Route path='contactUs' component={ContactUs} />
+              <Route path='companies' component={CompanyListing} />
               {/* <Route path="company/:id" component={}/> */}
               <Route path="*" component={PageNotFound} />
             </Route>
