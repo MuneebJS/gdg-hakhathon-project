@@ -1,0 +1,12 @@
+
+.featured_ser_card:hover .icon  {
+    color: #ffffff!important
+  }
+
+.featured_ser_card:hover .title {
+    color: #ffffff!important;
+}
+
+.featured_ser_card:hover .desc {
+    color: #ffffff!important;
+}

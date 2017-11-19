@@ -1,0 +1,5 @@
+export default class  Actions{
+    static REQUEST_SERVICE_SUCCESS = 'REQUEST_SERVICE_SUCCESS';
+    static REQUEST_SERVICE_ERROR = 'REQUEST_SERVICE_ERROR';
+}
+
