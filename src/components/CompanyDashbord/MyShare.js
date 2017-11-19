@@ -15,7 +15,7 @@ var styles = {};
 class Signup extends React.Component {
   constructor() {
     super();
-    this.state = {  }
+    this.state = {}
   }
   componentDidMount() {
     if (!this.props.shares) {
@@ -24,10 +24,15 @@ class Signup extends React.Component {
   }
   render() {
     return (
-      <div>
-        {/* { JSON.stringify(this.props) } */}
-        {this.props.shares ? this.props.shares.map(a => <Card subTitle={'investment: ' + a.investment} desc={'Total Shares: ' + a.totalShare + ' Per Share: ' + a.perShare } />) : <h1>Loading</h1>}
-      </div>
+      <Grid>
+        <Row>
+          {this.props.shares ? this.props.shares.map(a =>
+            <Col xs={12} sm={6} md={4}>
+              <Card subTitle={'investment: ' + a.investment} desc={'Total Shares: ' + a.totalShare + ' Per Share: ' + a.perShare} />
+            </Col>
+          ) : <h1>Loading</h1>}
+        </Row>
+      </Grid>
     );
   }
 }

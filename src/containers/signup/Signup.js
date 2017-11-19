@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import Radium from 'radium';
-import {Grid, Row, Col} from 'react-bootstrap'
+import {Grid, Row, Col, MenuItem, Dropdown} from 'react-bootstrap'
 import  globalConst from '../../globalConst';
 import Title from '../../components/Title'
 import FieldGroup from '../../components/FieldGroup'
@@ -18,13 +18,17 @@ class Signup extends React.Component {
   constructor() {
     super();
     this.signup = this.signup.bind(this)
+    this.state = {
+      type: 'company'
+    }
   }
 
   signup(e) {
     e.preventDefault();
     var credentials = {
         email: this.email.value,
-        pass: this.password.value
+        pass: this.password.value,
+        type: this.state.type
     }
     console.log(credentials)
     this.props.signup(credentials)
@@ -72,6 +76,10 @@ class Signup extends React.Component {
           inputRef = {(input) => this.email = input }
           
         />
+        <select className="form-control" onChange={(a) => this.setState({ type: a })} style={{ marginBottom: 10 }}>
+          <option value="company">Company</option>
+          <option value="buyer">Buyer</option>
+        </select>
         <FieldGroup
           id="password"
           type="password"
