@@ -8,22 +8,25 @@ import { connect } from 'react-redux';
 import { signup } from '../../store/actions/authActions';
 import Button from '../../components/Button'
 import { database, auth } from 'firebase'
+import Card from './Card'
 
-var styles = {
-};
+var styles = {};
 
 class Signup extends React.Component {
   constructor() {
     super();
-    this.state = { shares: [] }
+    this.state = {  }
   }
   componentDidMount() {
-    
+    if (!this.props.shares) {
+      this.props.fetchShares()
+    }
   }
   render() {
     return (
       <div>
-
+        {/* { JSON.stringify(this.props) } */}
+        {this.props.shares ? this.props.shares.map(a => <Card subTitle={'investment: ' + a.investment} desc={'Total Shares: ' + a.totalShare + ' Per Share: ' + a.perShare } />) : <h1>Loading</h1>}
       </div>
     );
   }
@@ -32,8 +35,9 @@ class Signup extends React.Component {
 Signup = Radium(Signup);
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
-    shares: state.shareReducer
+    shares: state.shares.shares
   }
 }
 
@@ -41,7 +45,7 @@ let fetchShares = (dispatch, payload) => {
   auth().onAuthStateChanged(user => {
     database().ref('Shares/' + user.uid).off()
     database().ref('Shares/' + user.uid).on('value', snap => {
-      dispatch({ type: 'SET_SHARE', payload: Object.values(snap.val()) })
+      dispatch({ type: 'SET_SHARES', payload: Object.values(snap.val()) })
     })
   })
 }
@@ -54,4 +58,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapDispatchToProps, mapDispatchToProps)(Signup)
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)

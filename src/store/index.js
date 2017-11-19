@@ -1,10 +1,12 @@
 import { combineReducers, applyMiddleware, compose, createStore } from 'redux'
 import { requestReducer } from './reducers/reqReducer'
+import { shareReducer } from './reducers/SharesReducers'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
-    requestReducer: requestReducer
+    requestReducer: requestReducer,
+    shares: shareReducer
 })
 
 const middleware = compose(
