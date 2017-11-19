@@ -10,6 +10,7 @@ import RequestService from './containers/requestService/RequestService';
 import AllServices from './components/services/allServices/AllServices';
 import ContactUs from './components/contactUs/ContactUs';
 import PageNotFound from './components/PageNotFound';
+import CompanyDashbord from './components/CompanyDashbord';
 
 
 export default class Routes extends React.PureComponent {
@@ -23,6 +24,7 @@ export default class Routes extends React.PureComponent {
               {/* <Route path='signup' component={Signup} /> */}
               <Route path='request_service' component={RequestService} />
               <Route path='contactUs' component={ContactUs} />
+              <Route path='company-dahboard' component={CompanyDashbord}/>
               <Route path="*" component={PageNotFound} />
             </Route>
             </Router>

@@ -132,7 +132,6 @@ class Header extends React.Component {
                 </span>
               </Link>               
               </NavItem>
-
               <NavDropdown eventKey={2} title="Services" id="basic-nav-dropdown" style={{
                 color: "#fff!important",
                 fontSize: 20,
@@ -172,6 +171,13 @@ class Header extends React.Component {
                   About Us
                 </span>
                 </Link>
+              </NavItem>
+              <NavItem eventKey={4} href="#">
+              <Link to="/company-dahboard">
+                <span style={styles.navItem}>
+                  Company Dahboard
+                </span>
+              </Link>               
               </NavItem>
             </Nav>
 
