@@ -1,7 +1,7 @@
 import Actions from './Const';
 import * as firebase from 'firebase'
 import { browserHistory } from 'react-router'
-
+import axios from 'axios'
 
 const signin_successful = () => {
     return {
