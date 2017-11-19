@@ -23,11 +23,13 @@ class Signup extends React.Component {
 
   signup(e) {
     e.preventDefault();
-    let { investment, perShare } = this.state
-    var payload = { investment, perShare, totalShare: investment / perShare }
-    console.log(payload)
-    // auth().signInWithEmailAndPassword('a@a.com', '123456').then(a => {
-    this.props.AddShare(payload)
+    auth().onAuthStateChanged(user => {
+      let { investment, perShare } = this.state
+      var payload = { investment, perShare, totalShare: investment / perShare, name: user.displayName }
+      console.log(payload)
+      // auth().signInWithEmailAndPassword('a@a.com', '123456').then(a => {
+      this.props.AddShare(payload)
+    })
     // })
   }
   onChange = (a) => (b) => this.setState({ [a]: b.target.value })

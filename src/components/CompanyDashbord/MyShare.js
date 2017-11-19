@@ -26,11 +26,11 @@ class Signup extends React.Component {
     return (
       <Grid>
         <Row>
-          {this.props.shares ? this.props.shares.map(a =>
+          {this.props.shares ? this.props.shares.length ? this.props.shares.map(a =>
             <Col xs={12} sm={6} md={4}>
               <Card subTitle={'investment: ' + a.investment} desc={'Total Shares: ' + a.totalShare + ' Per Share: ' + a.perShare} />
-            </Col>
-          ) : <h1>Loading</h1>}
+            </Col>  
+          ) : <h1>You Have No Share for Sale </h1> : <h1>Loading</h1> }
         </Row>
       </Grid>
     );
@@ -50,7 +50,17 @@ let fetchShares = (dispatch, payload) => {
   auth().onAuthStateChanged(user => {
     database().ref('Shares/' + user.uid).off()
     database().ref('Shares/' + user.uid).on('value', snap => {
-      dispatch({ type: 'SET_SHARES', payload: Object.values(snap.val()) })
+      dispatch({ type: 'SET_SHARES', payload: Object.values(snap.val() || {}) })
+    })
+  })
+}
+
+let fetchAllShares = (dispatch, payload) => {
+  auth().onAuthStateChanged(user => {
+    database().ref('Shares').off()
+    database().ref('Shares').on('value', snap => {
+      database().ref()
+      dispatch({ type: 'SET_ALL_SHARES', payload: Object.values(snap.val() || {}).map(a => Object.values(a)) })
     })
   })
 }
